@@ -1,3 +1,5 @@
+use itertools::Itertools;
+
 pub fn say_hi() -> bool {
     println!("Hi from fonction");
     return true;
@@ -41,7 +43,8 @@ pub fn is_sorted(slice: &[u32]) -> bool {
 /// assert_eq!(into_couples(&v), vec![(0, 1), (2, 3)])
 /// ```
 pub fn into_couples(s: &[u32]) -> Vec<(u32, u32)> {
-    unimplemented!()
+    let iter = s.chunks(2);
+    iter.map(|v| (v[0], v[1])).collect()
 }
 
 /// Return the sum of the n first even integers of the given slice.

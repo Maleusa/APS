@@ -13,4 +13,9 @@ fn main() {
     assert!(lib::is_sorted(&[1,2,3,4]));
     assert!(!lib::is_sorted(&[1,3,2,4]));
     assert!(!lib::is_sorted(&[1,2,4,3]));
+
+    // into couples
+    use base::into_couples;
+    let v = vec![0, 1, 2, 3];
+    assert_eq!(lib::into_couples(&v), vec![(0, 1), (2, 3)])
 }
