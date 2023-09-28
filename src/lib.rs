@@ -1,4 +1,4 @@
-pub fn sayHi() -> bool {
+pub fn say_hi() -> bool {
     println!("Hi from fonction");
     return true;
 }

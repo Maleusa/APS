@@ -3,7 +3,7 @@ mod lib;
 
 fn main() {
     println!("Hello, wolrd!");
-    lib::sayHi();
+    lib::say_hi();
     // dot product
     let a1 = [1, 2, 3];
     let a2 = [4, 5, 6];
