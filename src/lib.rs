@@ -28,7 +28,7 @@ pub fn dot_product(s1: &[u32], s2: &[u32]) -> u32 {
 /// assert!(!is_sorted(&[1,2,4,3]));
 /// ```
 pub fn is_sorted(slice: &[u32]) -> bool {
-    unimplemented!()
+    slice.windows(2).all(|v| v[0] <= v[1])
 }
 
 /// Transform a slice n u32 (n even) into a vector of n/2 couples of u32.
