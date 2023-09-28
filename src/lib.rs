@@ -1,3 +1,7 @@
+pub fn sayHi() -> bool {
+    println!("Hi from fonction");
+    return true;
+}
 /// Return the dot product of s1 by s2.
 ///
 /// # Example:
@@ -9,7 +13,19 @@
 /// assert_eq!(dot_product(&a1, &a2), 1*4+2*5+3*6)
 /// ```
 pub fn dot_product(s1: &[u32], s2: &[u32]) -> u32 {
-unimplemented!()
+    let mut iter1 = s1.iter();
+    let mut iter2 = s2.iter();
+    let mut res: u32 = 0;
+    let mut a: u32;
+    let mut b: u32;
+
+    for _ in 0..s1.len() {
+        a = *iter1.next().unwrap();
+        b = *iter2.next().unwrap();
+
+        res += a * b;
+    }
+    return res;
 }
 
 /// Return if given slice is sorted.
@@ -23,7 +39,7 @@ unimplemented!()
 /// assert!(!is_sorted(&[1,2,4,3]));
 /// ```
 pub fn is_sorted(slice: &[u32]) -> bool {
-unimplemented!()
+    unimplemented!()
 }
 
 /// Transform a slice n u32 (n even) into a vector of n/2 couples of u32.
@@ -36,7 +52,7 @@ unimplemented!()
 /// assert_eq!(into_couples(&v), vec![(0, 1), (2, 3)])
 /// ```
 pub fn into_couples(s: &[u32]) -> Vec<(u32, u32)> {
-unimplemented!()
+    unimplemented!()
 }
 
 /// Return the sum of the n first even integers of the given slice.
@@ -51,7 +67,7 @@ unimplemented!()
 /// assert_eq!(sum_even_n(&t, 3), 10);
 /// ```
 pub fn sum_even_n(slice: &[u32], n: usize) -> u32 {
-unimplemented!()
+    unimplemented!()
 }
 
 /// Return the number of 'a' in given string slice.
@@ -64,7 +80,7 @@ unimplemented!()
 /// assert_eq!(number_of_a(string_slice), 4)
 /// ```
 pub fn number_of_a(s: &str) -> usize {
-unimplemented!()
+    unimplemented!()
 }
 
 /// Return the number of 0 and the number of 1 in given slice.
@@ -77,7 +93,7 @@ unimplemented!()
 /// assert_eq!(number_of_01(&[2, 5, 1, 1, 2]), (0, 2));
 /// ```
 pub fn number_of_01(slice: &[u32]) -> (usize, usize) {
-unimplemented!()
+    unimplemented!()
 }
 
 /// Return the position of the first occurence of given number in given slice.
@@ -91,7 +107,7 @@ unimplemented!()
 /// assert_eq!(first_place(&t, 8), None);
 /// ```
 pub fn first_place(slice: &[u32], target: u32) -> Option<usize> {
-unimplemented!()
+    unimplemented!()
 }
 
 /// Return the String formed by all digits in given strings.
@@ -104,7 +120,7 @@ unimplemented!()
 /// assert_eq!(digits(&["1+2", "*3", "=9"]), String::from("1239"));
 /// ```
 pub fn digits(strings: &[&str]) -> String {
-unimplemented!()
+    unimplemented!()
 }
 
 /// Return the sum of digits of given integer.
@@ -117,7 +133,7 @@ unimplemented!()
 /// assert_eq!(digits_sum(456), 15);
 /// ```
 pub fn digits_sum(integer: u32) -> u32 {
-unimplemented!()
+    unimplemented!()
 }
 
 /// Return for which i the sum of f(i) (from 1 to infinity) is greater than n.
@@ -132,7 +148,7 @@ pub fn enough_sum<F>(f: F, limit: f64) -> usize
 where
     F: Fn(usize) -> f64,
 {
-unimplemented!()
+    unimplemented!()
 }
 
 /// Return the vector composed of start integer then all
@@ -147,7 +163,7 @@ pub fn intervals<I>(start: u32, end: u32, intermediate: I) -> Vec<u32>
 where
     I: IntoIterator<Item = u32>,
 {
-unimplemented!()
+    unimplemented!()
 }
 
 /// Return how many local extremum points (local min or local max) are
@@ -165,5 +181,5 @@ unimplemented!()
 /// assert_eq!(count_extremum(&[0, 1, 2, 2, 1, 1, 2, 3, 2]), 5);
 /// ```
 pub fn count_extremum(values: &[u32]) -> usize {
-unimplemented!()
+    unimplemented!()
 }
