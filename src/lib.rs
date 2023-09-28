@@ -13,19 +13,8 @@ pub fn say_hi() -> bool {
 /// assert_eq!(dot_product(&a1, &a2), 1*4+2*5+3*6)
 /// ```
 pub fn dot_product(s1: &[u32], s2: &[u32]) -> u32 {
-    let mut iter1 = s1.iter();
-    let mut iter2 = s2.iter();
-    let mut res: u32 = 0;
-    let mut a: u32;
-    let mut b: u32;
-
-    for _ in 0..s1.len() {
-        a = *iter1.next().unwrap();
-        b = *iter2.next().unwrap();
-
-        res += a * b;
-    }
-    return res;
+    let iter = std::iter::zip(s1, s2);
+    iter.map(|(a, b)| *a * *b).sum()
 }
 
 /// Return if given slice is sorted.
