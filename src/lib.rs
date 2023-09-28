@@ -1,20 +1,9 @@
-pub fn say_hi() -> bool {
-    println!("Hi from fonction");
-    return true;
-}
+use itertools::Itertools;
+
 /// Return the dot product of s1 by s2.
-///
-/// # Example:
-///
-/// ```
-/// use base::dot_product;
-/// let a1 = [1, 2, 3];
-/// let a2 = [4, 5, 6];
-/// assert_eq!(dot_product(&a1, &a2), 1*4+2*5+3*6)
-/// ```
+
 pub fn dot_product(s1: &[u32], s2: &[u32]) -> u32 {
-    let iter = std::iter::zip(s1, s2);
-    iter.map(|(a, b)| *a * *b).sum()
+    s1.iter().zip(s2.iter()).map(|(a, b)| a * b).sum()
 }
 
 /// Return if given slice is sorted.
@@ -28,7 +17,7 @@ pub fn dot_product(s1: &[u32], s2: &[u32]) -> u32 {
 /// assert!(!is_sorted(&[1,2,4,3]));
 /// ```
 pub fn is_sorted(slice: &[u32]) -> bool {
-    unimplemented!()
+    slice.windows(2).all(|a| a[0] <= a[1])
 }
 
 /// Transform a slice n u32 (n even) into a vector of n/2 couples of u32.
@@ -41,7 +30,11 @@ pub fn is_sorted(slice: &[u32]) -> bool {
 /// assert_eq!(into_couples(&v), vec![(0, 1), (2, 3)])
 /// ```
 pub fn into_couples(s: &[u32]) -> Vec<(u32, u32)> {
-    unimplemented!()
+    let mut vec : Vec<(u32, u32)> = vec![];
+    for elem in s.windows(2).step_by(2) {
+        vec.push((elem[0], elem[1]));
+    }
+    return vec;
 }
 
 /// Return the sum of the n first even integers of the given slice.
