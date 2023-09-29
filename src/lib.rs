@@ -59,7 +59,8 @@ pub fn into_couples(s: &[u32]) -> Vec<(u32, u32)> {
 /// assert_eq!(sum_even_n(&t, 3), 10);
 /// ```
 pub fn sum_even_n(slice: &[u32], n: usize) -> u32 {
-    unimplemented!()
+    let (even, _):(Vec<_>, Vec<_>) = slice.iter().partition(|x| *x % 2 == 0);
+    even.iter().take(n).sum()
 }
 
 /// Return the number of 'a' in given string slice.

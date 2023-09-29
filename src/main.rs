@@ -15,7 +15,13 @@ fn main() {
     assert!(!lib::is_sorted(&[1,2,4,3]));
 
     // into couples
-    use base::into_couples;
     let v = vec![0, 1, 2, 3];
-    assert_eq!(lib::into_couples(&v), vec![(0, 1), (2, 3)])
+    assert_eq!(lib::into_couples(&v), vec![(0, 1), (2, 3)]);
+
+
+    // sum_even_n
+    let t = [3, 1, 5, 2, 3, 2, 6, 4, 3, 7, 4];
+    assert_eq!(lib::sum_even_n(&t, 1), 2);
+    assert_eq!(lib::sum_even_n(&t, 2), 4);
+    assert_eq!(lib::sum_even_n(&t, 3), 10);
 }
