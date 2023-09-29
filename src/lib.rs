@@ -9,7 +9,16 @@
 /// assert_eq!(dot_product(&a1, &a2), 1*4+2*5+3*6)
 /// ```
 pub fn dot_product(s1: &[u32], s2: &[u32]) -> u32 {
-unimplemented!()
+    let mut p: u32 = 0;
+    assert_eq!(s1.len(), s2.len());
+    // for i in 0..s1.len() {
+    //     p += s1[i] * s2[i];
+    // }
+    let iter = s1.iter().zip(s2.iter());
+    for (e1, e2) in iter {
+        p += e1 * e2;
+    }
+    p
 }
 
 /// Return if given slice is sorted.
@@ -23,7 +32,16 @@ unimplemented!()
 /// assert!(!is_sorted(&[1,2,4,3]));
 /// ```
 pub fn is_sorted(slice: &[u32]) -> bool {
-unimplemented!()
+    let mut iter = slice.iter();
+    if let Some(mut f) = iter.next() {
+        for e in iter {
+            if e < f {
+                return false;
+            }
+            f = e;
+        }
+    }
+    true
 }
 
 /// Transform a slice n u32 (n even) into a vector of n/2 couples of u32.
@@ -36,7 +54,13 @@ unimplemented!()
 /// assert_eq!(into_couples(&v), vec![(0, 1), (2, 3)])
 /// ```
 pub fn into_couples(s: &[u32]) -> Vec<(u32, u32)> {
-unimplemented!()
+    assert_eq!(s.len() % 2, 0);
+    let mut v = Vec::<(u32, u32)>::new();
+    let mut iter = s.iter();
+    for _ in 0..s.len()/2 {
+        v.push((*iter.next().unwrap(), *iter.next().unwrap()));
+    }
+    v
 }
 
 /// Return the sum of the n first even integers of the given slice.
@@ -51,7 +75,12 @@ unimplemented!()
 /// assert_eq!(sum_even_n(&t, 3), 10);
 /// ```
 pub fn sum_even_n(slice: &[u32], n: usize) -> u32 {
-unimplemented!()
+    let even_slice = slice.iter().filter(|x| *x % 2 == 0);
+    let mut sum = 0;
+    for e in even_slice.take(n) {
+        sum += e;
+    }
+    sum
 }
 
 /// Return the number of 'a' in given string slice.
@@ -64,7 +93,7 @@ unimplemented!()
 /// assert_eq!(number_of_a(string_slice), 4)
 /// ```
 pub fn number_of_a(s: &str) -> usize {
-unimplemented!()
+    s.chars().filter(|c| *c == 'a').count()
 }
 
 /// Return the number of 0 and the number of 1 in given slice.
@@ -77,7 +106,16 @@ unimplemented!()
 /// assert_eq!(number_of_01(&[2, 5, 1, 1, 2]), (0, 2));
 /// ```
 pub fn number_of_01(slice: &[u32]) -> (usize, usize) {
-unimplemented!()
+    let mut res = (0, 0);
+    for e in slice {
+        if *e == 0 {
+            res.0 += 1;
+        }
+        else if *e == 1 {
+            res.1 += 1;
+        }
+    }
+    res
 }
 
 /// Return the position of the first occurence of given number in given slice.
@@ -91,7 +129,12 @@ unimplemented!()
 /// assert_eq!(first_place(&t, 8), None);
 /// ```
 pub fn first_place(slice: &[u32], target: u32) -> Option<usize> {
-unimplemented!()
+    for (i, e) in slice.iter().enumerate() {
+        if *e == target {
+            return Some(i)
+        }
+    }
+    None
 }
 
 /// Return the String formed by all digits in given strings.
@@ -104,7 +147,15 @@ unimplemented!()
 /// assert_eq!(digits(&["1+2", "*3", "=9"]), String::from("1239"));
 /// ```
 pub fn digits(strings: &[&str]) -> String {
-unimplemented!()
+    let mut res = String::new();
+    for &s in strings {
+        for c in s.chars() {
+            if c.to_digit(10) != None {
+                res.push(c);
+            }
+        }
+    }
+    res
 }
 
 /// Return the sum of digits of given integer.
@@ -117,7 +168,13 @@ unimplemented!()
 /// assert_eq!(digits_sum(456), 15);
 /// ```
 pub fn digits_sum(integer: u32) -> u32 {
-unimplemented!()
+    let mut i = integer;
+    let mut sum = 0;
+    while i / 10 > 0 {
+        sum += i % 10;
+        i = i / 10;
+    }
+    sum + i
 }
 
 /// Return for which i the sum of f(i) (from 1 to infinity) is greater than n.
@@ -132,7 +189,13 @@ pub fn enough_sum<F>(f: F, limit: f64) -> usize
 where
     F: Fn(usize) -> f64,
 {
-unimplemented!()
+    let mut i = 0;
+    let mut sum = 0.;
+    while sum < limit {
+        i += 1;
+        sum += f(i);
+    }
+    i
 }
 
 /// Return the vector composed of start integer then all
@@ -147,7 +210,12 @@ pub fn intervals<I>(start: u32, end: u32, intermediate: I) -> Vec<u32>
 where
     I: IntoIterator<Item = u32>,
 {
-unimplemented!()
+    let mut res = vec![start];
+    for e in intermediate.into_iter() {
+        res.push(e);
+    }
+    res.push(end);
+    res
 }
 
 /// Return how many local extremum points (local min or local max) are
@@ -165,5 +233,19 @@ unimplemented!()
 /// assert_eq!(count_extremum(&[0, 1, 2, 2, 1, 1, 2, 3, 2]), 5);
 /// ```
 pub fn count_extremum(values: &[u32]) -> usize {
-unimplemented!()
+    let min = values.iter().min();
+    let max = values.iter().max();
+    let mut min_count = 0;
+    let mut max_count = 0;
+    for v in values {
+        if Some(v) == min {
+            min_count += 1;
+        }
+        else if Some(v) == max {
+            max_count += 1;
+        }
+    }
+    min_count.max(max_count)
 }
+
+
