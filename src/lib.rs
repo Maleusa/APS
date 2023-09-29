@@ -73,7 +73,7 @@ pub fn sum_even_n(slice: &[u32], n: usize) -> u32 {
 /// assert_eq!(number_of_a(string_slice), 4)
 /// ```
 pub fn number_of_a(s: &str) -> usize {
-    unimplemented!()
+    s.chars().filter(|c| *c == 'a').count()
 }
 
 /// Return the number of 0 and the number of 1 in given slice.
