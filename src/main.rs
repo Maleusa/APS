@@ -27,5 +27,9 @@ fn main() {
     // count a in str
     use base::number_of_a;
     let string_slice = "a vous dirais-je maman";
-    assert_eq!(number_of_a(string_slice), 4)
+    assert_eq!(number_of_a(string_slice), 4);
+
+    use base::number_of_01;
+    assert_eq!(number_of_01(&[0, 1, 1, 1, 4, 0, 1, 0, 2]), (3, 4));
+    assert_eq!(number_of_01(&[2, 5, 1, 1, 2]), (0, 2));
 }

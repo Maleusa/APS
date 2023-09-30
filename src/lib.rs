@@ -59,7 +59,7 @@ pub fn into_couples(s: &[u32]) -> Vec<(u32, u32)> {
 /// assert_eq!(sum_even_n(&t, 3), 10);
 /// ```
 pub fn sum_even_n(slice: &[u32], n: usize) -> u32 {
-    let (even, _):(Vec<_>, Vec<_>) = slice.iter().partition(|x| *x % 2 == 0);
+    let (even, _): (Vec<_>, Vec<_>) = slice.iter().partition(|x| *x % 2 == 0);
     even.iter().take(n).sum()
 }
 
@@ -86,7 +86,23 @@ pub fn number_of_a(s: &str) -> usize {
 /// assert_eq!(number_of_01(&[2, 5, 1, 1, 2]), (0, 2));
 /// ```
 pub fn number_of_01(slice: &[u32]) -> (usize, usize) {
-    unimplemented!()
+    
+    //let (z, other):(Vec<_>, Vec<_>) = slice.into_iter().partition(|&x| *x == 0u32);
+    //let (zeros, other):(Vec<_>, Vec<_>) = slice.iter().partition(|&x| *x == 0u32);
+    //let (ones, _):(Vec<_>, Vec<_>) = other.iter().partition(|&x| *x == 0u32);
+    //(zeros.len(), ones.len())
+
+    slice.iter().fold((0, 0), |(z, o), &e| {
+        if e == 0 {
+            return (z + 1, o);
+        }
+        if e == 1 {
+            return (z, o + 1);
+        }
+        else {
+            return (z, o);
+        }
+    })
 }
 
 /// Return the position of the first occurence of given number in given slice.
