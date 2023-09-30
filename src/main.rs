@@ -38,4 +38,8 @@ fn main() {
     assert_eq!(first_place(&t, 5), Some(2));
     assert_eq!(first_place(&t, 3), Some(0));
     assert_eq!(first_place(&t, 8), None);
+
+    use base::digits;
+    assert_eq!(digits(&["5 * 5", "=25"]), String::from("5525"));
+    assert_eq!(digits(&["1+2", "*3", "=9"]), String::from("1239"));
 }

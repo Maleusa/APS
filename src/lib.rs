@@ -86,7 +86,6 @@ pub fn number_of_a(s: &str) -> usize {
 /// assert_eq!(number_of_01(&[2, 5, 1, 1, 2]), (0, 2));
 /// ```
 pub fn number_of_01(slice: &[u32]) -> (usize, usize) {
-    
     //let (z, other):(Vec<_>, Vec<_>) = slice.into_iter().partition(|&x| *x == 0u32);
     //let (zeros, other):(Vec<_>, Vec<_>) = slice.iter().partition(|&x| *x == 0u32);
     //let (ones, _):(Vec<_>, Vec<_>) = other.iter().partition(|&x| *x == 0u32);
@@ -98,8 +97,7 @@ pub fn number_of_01(slice: &[u32]) -> (usize, usize) {
         }
         if e == 1 {
             return (z, o + 1);
-        }
-        else {
+        } else {
             return (z, o);
         }
     })
@@ -133,7 +131,9 @@ pub fn first_place(slice: &[u32], target: u32) -> Option<usize> {
 /// assert_eq!(digits(&["1+2", "*3", "=9"]), String::from("1239"));
 /// ```
 pub fn digits(strings: &[&str]) -> String {
-    unimplemented!()
+    strings.iter().fold("".to_string(), |acc, &s|{
+        acc + &s.chars().filter(|c| c.is_digit(10)).collect::<String>()
+    })
 }
 
 /// Return the sum of digits of given integer.
