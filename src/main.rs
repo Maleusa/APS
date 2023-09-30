@@ -33,4 +33,36 @@ fn main() {
     assert_eq!(number_of_01(&[0, 1, 1, 1, 4, 0, 1, 0, 2]), (3, 4));
     assert_eq!(number_of_01(&[2, 5, 1, 1, 2]), (0, 2));
     println!("number_of_01 DONE");
+
+    use base::first_place;
+    let t = [3, 1, 5, 2, 7, 6];
+    assert_eq!(first_place(&t, 5), Some(2));
+    assert_eq!(first_place(&t, 3), Some(0));
+    assert_eq!(first_place(&t, 8), None);
+    println!("first_place DONE");
+
+    use base::digits;
+    assert_eq!(digits(&["5 * 5", "=25"]), String::from("5525"));
+    assert_eq!(digits(&["1+2", "*3", "=9"]), String::from("1239"));
+    println!("digits DONE");
+
+    use base::digits_sum;
+    assert_eq!(digits_sum(123), 6);
+    assert_eq!(digits_sum(456), 15);
+    println!("digits_sum DONE");
+
+    use base::enough_sum;
+    assert_eq!(enough_sum(|i| 1.0, 9.5), 10);
+    assert_eq!(enough_sum(|i| 1.0 / (i as f64), 2.0), 4); // 1+1/2+1/3+1/4
+    println!("enough_sum DONE");                                                          
+
+
+
+
+
+
+
+
+
+
 }
