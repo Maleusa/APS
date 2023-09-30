@@ -116,7 +116,11 @@ pub fn number_of_01(slice: &[u32]) -> (usize, usize) {
 /// assert_eq!(first_place(&t, 8), None);
 /// ```
 pub fn first_place(slice: &[u32], target: u32) -> Option<usize> {
-    unimplemented!()
+    let res = slice.iter().find_position(|&x| *x == target);
+    match res {
+        Some((pos, _)) => Option::Some(pos),
+        None => Option::None,
+    }
 }
 
 /// Return the String formed by all digits in given strings.

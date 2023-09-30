@@ -32,4 +32,10 @@ fn main() {
     use base::number_of_01;
     assert_eq!(number_of_01(&[0, 1, 1, 1, 4, 0, 1, 0, 2]), (3, 4));
     assert_eq!(number_of_01(&[2, 5, 1, 1, 2]), (0, 2));
+
+    use base::first_place;
+    let t = [3, 1, 5, 2, 7, 6];
+    assert_eq!(first_place(&t, 5), Some(2));
+    assert_eq!(first_place(&t, 3), Some(0));
+    assert_eq!(first_place(&t, 8), None);
 }
