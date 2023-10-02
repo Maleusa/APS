@@ -130,5 +130,31 @@ where
 /// assert_eq!(count_extremum(&[0, 1, 2, 2, 1, 1, 2, 3, 2]), 5);
 /// ```
 pub fn count_extremum(values: &[u32]) -> usize {
-    unimplemented!();
+    if values.len() == 0 {
+        return 0;
+    };
+    if values.len() == 1 {
+        return 1;
+    };
+    if values.len() == 2 {
+        if values[0] != values[1] {
+            return 2;
+        } else {
+            return 1;
+        }
+    };
+    let mut vec: Vec<u32> = vec![];
+    values.windows(2).for_each(|a| {
+        if a[0] != a[1] {
+            vec.push(a[0])
+        }
+    });
+    if (values.len()%2 == 1) && (values[values.len()-1] != values[values.len()-2]) {vec.push(values[values.len()-1])};
+    vec.windows(3).fold(0, |acc, a| {
+        if ((a[1] > a[0]) && (a[1] > a[2])) || ((a[1] < a[0]) && (a[1] < a[2])) {
+            acc + 1
+        } else {
+            acc
+        }
+    })+2
 }

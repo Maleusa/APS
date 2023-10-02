@@ -54,15 +54,14 @@ fn main() {
     use base::enough_sum;
     assert_eq!(enough_sum(|i| 1.0, 9.5), 10);
     assert_eq!(enough_sum(|i| 1.0 / (i as f64), 2.0), 4); // 1+1/2+1/3+1/4
-    println!("enough_sum DONE");                                                          
+    println!("enough_sum DONE");
 
-
-
-
-
-
-
-
-
-
+    use base::count_extremum;
+    assert_eq!(count_extremum(&[]), 0);
+    assert_eq!(count_extremum(&[0]), 1);
+    assert_eq!(count_extremum(&[0, 0]), 1);
+    assert_eq!(count_extremum(&[0, 1, 0]), 3);
+    assert_eq!(count_extremum(&[0, 1, 2, 3, 4, 4, 4, 3, 2, 1, 0]), 3);
+    assert_eq!(count_extremum(&[0, 1, 2, 2, 1, 1, 2, 3, 2]), 5);
+    println!("count_extremum DONE");
 }
