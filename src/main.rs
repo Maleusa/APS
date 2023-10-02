@@ -42,4 +42,8 @@ fn main() {
     use base::digits;
     assert_eq!(digits(&["5 * 5", "=25"]), String::from("5525"));
     assert_eq!(digits(&["1+2", "*3", "=9"]), String::from("1239"));
+
+    use base::enough_sum;
+    assert_eq!(enough_sum(|i| 1.0, 9.5), 10);
+    assert_eq!(enough_sum(|i| 1.0 / (i as f64), 2.0), 4); // 1+1/2+1/3+1/4
 }

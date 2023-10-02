@@ -161,7 +161,13 @@ pub fn enough_sum<F>(f: F, limit: f64) -> usize
 where
     F: Fn(usize) -> f64,
 {
-    unimplemented!()
+    let mut ind:usize = 0;
+    let mut sum:f64 = 0f64;
+    while sum < limit {
+        ind += 1;
+        sum += f(ind);
+    }   
+    ind
 }
 
 /// Return the vector composed of start integer then all
