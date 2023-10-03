@@ -216,18 +216,12 @@ pub fn count_extremum(values: &[u32]) -> usize {
             return 1;
         }
     };
-    let mut vec: Vec<u32> = vec![];
-    values.windows(2).for_each(|a| {
-        if a[0] != a[1] {
-            vec.push(a[0])
-        }
-    });
-    if (values.len()%2 == 1) && (values[values.len()-1] != values[values.len()-2]) {vec.push(values[values.len()-1])};
-    vec.windows(3).fold(0, |acc, a| {
-        if ((a[1] > a[0]) && (a[1] > a[2])) || ((a[1] < a[0]) && (a[1] < a[2])) {
+    use itertools::Itertools;
+    values.iter().dedup().tuple_windows::<(_,_,_)>().fold(0, |acc, a| {
+        if ((a.1 > a.0) && (a.1 > a.2)) || ((a.1 < a.0) && (a.1 < a.2)) {
             acc + 1
         } else {
             acc
         }
-    })+2
+    }) + 2  
 }
