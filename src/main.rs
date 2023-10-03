@@ -35,7 +35,7 @@ fn main() {
     assert_eq!(digits_sum(123), 6);
     assert_eq!(digits_sum(456), 15);
 
-    assert_eq!(enough_sum(|i| 1.0, 9.5), 10);
+    assert_eq!(enough_sum(|_i| 1.0, 9.5), 10);
     assert_eq!(enough_sum(|i| 1.0/(i as f64), 2.0), 4); // 1+1/2+1/3+1/4
 
     assert_eq!(intervals(0, 4, 1..4), vec![0, 1, 2, 3, 4]);

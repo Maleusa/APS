@@ -233,19 +233,42 @@ where
 /// assert_eq!(count_extremum(&[0, 1, 2, 2, 1, 1, 2, 3, 2]), 5);
 /// ```
 pub fn count_extremum(values: &[u32]) -> usize {
-    let min = values.iter().min();
-    let max = values.iter().max();
-    let mut min_count = 0;
-    let mut max_count = 0;
-    for v in values {
-        if Some(v) == min {
-            min_count += 1;
+    let mut iter = values.into_iter();
+    let mut count_max = 0;
+    let mut count_min = 0;
+    if let Some(mut last) = iter.next() {
+        let mut state = None;
+        count_min += 1;
+        
+        for e in iter {
+            if state == None && e != last {
+                count_min += 1;
+            }
+            else if state == Some(1) && e <= last {
+                count_max += 1;
+            }
+            else if state == Some(-1) && e >= last {
+                count_min += 1;
+            }
+    
+            if e > last {
+                state = Some(1);
+            }
+            else if e == last {
+                state = Some(0);
+            }
+            else {
+                state = Some(-1);
+            }
+            last = e;
+            
         }
-        else if Some(v) == max {
-            max_count += 1;
-        }
+        count_min + count_max
     }
-    min_count.max(max_count)
+    else {
+        0
+    }
+
 }
 
 
