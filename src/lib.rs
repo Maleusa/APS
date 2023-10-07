@@ -59,8 +59,10 @@ pub fn into_couples(s: &[u32]) -> Vec<(u32, u32)> {
 /// assert_eq!(sum_even_n(&t, 3), 10);
 /// ```
 pub fn sum_even_n(slice: &[u32], n: usize) -> u32 {
-    let (even, _): (Vec<_>, Vec<_>) = slice.iter().partition(|x| *x % 2 == 0);
-    even.iter().take(n).sum()
+    //let (even, _): (Vec<_>, Vec<_>) = slice.iter().partition(|x| *x % 2 == 0);
+    //even.iter().take(n).sum();
+    slice.iter().filter(|&e| e % 2 == 0).take(n).sum()
+
 }
 
 /// Return the number of 'a' in given string slice.
@@ -134,6 +136,8 @@ pub fn digits(strings: &[&str]) -> String {
     strings.iter().fold("".to_string(), |acc, &s|{
         acc + &s.chars().filter(|c| c.is_digit(10)).collect::<String>()
     })
+    // could have used flatten on map : flat_map
+
 }
 
 /// Return the sum of digits of given integer.
