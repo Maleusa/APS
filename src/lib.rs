@@ -1,4 +1,4 @@
-use itertools::Itertools;
+use itertools::{Itertools, Chunk};
 
 pub fn say_hi() -> bool {
     println!("Hi from fonction");
@@ -88,10 +88,12 @@ pub fn number_of_a(s: &str) -> usize {
 /// assert_eq!(number_of_01(&[2, 5, 1, 1, 2]), (0, 2));
 /// ```
 pub fn number_of_01(slice: &[u32]) -> (usize, usize) {
-    //let (z, other):(Vec<_>, Vec<_>) = slice.into_iter().partition(|&x| *x == 0u32);
-    //let (zeros, other):(Vec<_>, Vec<_>) = slice.iter().partition(|&x| *x == 0u32);
-    //let (ones, _):(Vec<_>, Vec<_>) = other.iter().partition(|&x| *x == 0u32);
-    //(zeros.len(), ones.len())
+
+    //let (zeros, other) = slice.iter()
+    //                    .partition::<Vec<u32>,_>(|&x| *x == 0u32);
+    //let (ones, _):(Vec<u32>, Vec<u32>) = other.iter()
+    //               .partition(|&x| *x == 0u32);
+    //(zeros.len(), ones.len());
 
     slice.iter().fold((0, 0), |(z, o), &e| {
         if e == 0 {
@@ -150,7 +152,7 @@ pub fn digits(strings: &[&str]) -> String {
 /// assert_eq!(digits_sum(456), 15);
 /// ```
 pub fn digits_sum(integer: u32) -> u32 {
-    unimplemented!()
+    integer.to_string().chars().fold(0, |res, c| res + c.to_digit(10).unwrap())
 }
 
 /// Return for which i the sum of f(i) (from 1 to infinity) is greater than n.
@@ -186,7 +188,11 @@ pub fn intervals<I>(start: u32, end: u32, intermediate: I) -> Vec<u32>
 where
     I: IntoIterator<Item = u32>,
 {
-    unimplemented!()
+    let mut vec = Vec::new();
+    vec.push(start);
+    intermediate.into_iter().map(|x| vec.push(x)).count();
+    vec.push(end);
+    vec
 }
 
 /// Return how many local extremum points (local min or local max) are
@@ -204,5 +210,26 @@ where
 /// assert_eq!(count_extremum(&[0, 1, 2, 2, 1, 1, 2, 3, 2]), 5);
 /// ```
 pub fn count_extremum(values: &[u32]) -> usize {
-    unimplemented!()
+    // get 2 val et un sens
+    // si == ne cahnge rien
+    // si variations idem sens => rien
+    // si var =/= sens => sens change et plus 1
+
+
+    if values.len() == 0 {return 0}
+    if values.len() == 1 {return 1}
+
+    if values.len() == 2 {
+        if values[0] == values[1] {return 1}
+        return 2
+    }
+
+    values.iter().dedup().tuple_windows().fold(2, |acc, (a, b, c)| {
+        let mut res = acc;
+        if b > a && b > c || b < a && b < c {
+            res = acc + 1
+        }
+        res
+    })
+
 }
